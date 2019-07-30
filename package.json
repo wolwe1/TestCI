@@ -1,0 +1,29 @@
+{
+  "name": "testci",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Central_Interface/mainREST.ts",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "googleapis": "^39.2.0",
+    "helmet": "^3.20.0",
+    "morgan": "^1.9.1",
+    "nodemailer": "^6.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start" : "ts-node Central_Interface/mainREST.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wolwe1/TestCI.git"
+  },
+  "author": "Jarrod",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wolwe1/TestCI/issues"
+  },
+  "homepage": "https://github.com/wolwe1/TestCI#readme"
+}
