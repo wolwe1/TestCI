@@ -4,7 +4,7 @@ from firebase_admin import firestore
 import numpy as np
 
 # Fetch the service account key JSON file contents
-cred = credentials.Certificate('credentials.json')
+cred = credentials.Certificate('Central_Interface/credentials.json')
 firebase_admin.initialize_app(cred)
 
 #Create the DB object

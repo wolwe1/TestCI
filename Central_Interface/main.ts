@@ -112,7 +112,7 @@ export function validateUserHasBooking(email : string,room : string) : Promise<a
 export function getEmployeeEmails() : Promise<any>{
 
     return new Promise( (resolve,reject) =>{
-        var pyshell = new PythonShell("test.py");
+        var pyshell = new PythonShell("Central_Interface/test.py");
 
         pyshell.on('message', function (message) {
             // received a message sent from the Python script (a simple "print" statement)
@@ -130,6 +130,8 @@ export function getEmployeeEmails() : Promise<any>{
         // end the input stream and allow the process to exit
         pyshell.end(function (err) {
             if (err){
+                console.log(err);
+                
                 reject(err);
             };
   
