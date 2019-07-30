@@ -51,7 +51,7 @@ app.post("/validateUserHasBooking", (req, res, next) => {
     let email;
     let room;
 
-    console.log(req.query);
+    //console.log(req.query);
     
     if(req.query.hasOwnProperty("email") && req.query.hasOwnProperty("room")){
         
@@ -75,7 +75,7 @@ app.post("/richardsResponse", (req, res, next) => {
 });
 
 app.get('/getEmails', (req, res) => {
-
+    
     Main.getEmployeeEmails().then( employees =>{
         res.json(employees);
     }).catch( err => res.send(err));
@@ -104,5 +104,5 @@ app.get('/addEmployee', (req, res) => {
 
 app.get('/generateToken', (req, res) => {
 
-    res.json(Main.generateToken());
+    res.json(Main.generateToken(req.subject));
 });

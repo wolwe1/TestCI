@@ -258,9 +258,9 @@ export function verifyToken(token : Object) : boolean{
     }
 }
 
-let adminToken = generateToken("admin System");
-let otherToken = generateToken("other");
+// let adminToken = generateToken("admin System");
+// let otherToken = generateToken("other");
 
-verifyToken(adminToken);
+// verifyToken(adminToken);
 
-verifyToken(otherToken);
+// verifyToken(otherToken);

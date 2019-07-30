@@ -2,6 +2,7 @@
   "lockfileVersion": 1,
   "dependencies": {
     "@types/node": "^12.6.8",
+    "googleapis": "^39.2.0",
     "npm": "^6.10.1"
   }
 }
