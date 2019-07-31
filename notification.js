@@ -49,7 +49,8 @@ app.get('/', (req, res) => {
 
 
 // starting the server
-app.listen(3001, () => {
+let port = process.env.PORT || 3001;
+app.listen(port, () => {
   console.log('Notifications listening on port 3001');
 });
 

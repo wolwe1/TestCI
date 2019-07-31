@@ -17,7 +17,9 @@ var app = express();
 app.use(express.json());       // to support JSON-encoded bodies
 app.use(express.urlencoded()); // to support URL-encoded bodies
 
-app.listen(3000, () => {
+let port = process.env.PORT || 3000;
+
+app.listen(port, () => {
  console.log("Server running on port 3000");
 });
 
