@@ -49,10 +49,10 @@ export class GoogleAdaptee{
             .then( (credentials)=>{ return credentials;})
             .catch( err => reject(err))
         .then( (credentials) =>{ this.authorize(credentials)
-        .then( (oAuth2Client)=>{ this.listEvents(oAuth2Client,identifier,resultSize,endTimeISOString)
-        .then( (bookings)=>{ resolve(bookings);})
-        .catch( (err)=>{ reject(err);})})
-        .catch( (err)=>{ reject(err);})})
+            .then( (oAuth2Client)=>{ this.listEvents(oAuth2Client,identifier,resultSize,endTimeISOString)
+                .then( (bookings)=>{ resolve(bookings);})
+                .catch( (err)=>{ reject(err);})})
+            .catch( (err)=>{ reject(err);})})
         .catch( (err)=>{ reject(err);})})
     }
 

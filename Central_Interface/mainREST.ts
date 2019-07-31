@@ -20,7 +20,7 @@ app.use(express.urlencoded()); // to support URL-encoded bodies
 let port = process.env.PORT || 3000;
 
 app.listen(port, () => {
- console.log("Server running on port 3000");
+ console.log("Server running on port"+ port);
 });
 
 app.get("/getUsersFromDaysEvents", (req, res, next) => {

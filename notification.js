@@ -51,7 +51,7 @@ app.get('/', (req, res) => {
 // starting the server
 let port = process.env.PORT || 3001;
 app.listen(port, () => {
-  console.log('Notifications listening on port 3001');
+  console.log('Notifications listening on port'+ port);
 });
 
 // Determine a way to clean up the details about the email sender as well as determing what timeframe variables
