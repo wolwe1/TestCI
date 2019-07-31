@@ -93,9 +93,8 @@ export class GoogleAdaptee{
 
                 if (err){
                     let dir = path.resolve();
-                    console.log(dir);
                     
-                    reject('Error loading client secret file:'+ err); 
+                    reject('Error loading client secret file:'+ err + "\ndir:"+dir); 
                 }
                    
                 else
