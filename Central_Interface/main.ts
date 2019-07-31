@@ -71,11 +71,18 @@ export function validateUserHasBooking(email : string,room : string) : Promise<a
             
             
             for (let i = 0; i < closestEvents.length; i++) {
+                console.log("Current event:",closestEvents[i]);
+                
                 let event = closestEvents[i];
 
                 let timeNow = new Date();
-                let entranceAllowedToEvent = new Date(event.start.dateTime);
+                console.log("Date created");
+                
+                let entranceAllowedToEvent = new Date(event.startDate + "T"+event.startTime);
+                console.log("Entrance created");
                 entranceAllowedToEvent.setMinutes(entranceAllowedToEvent.getMinutes() - MINUTES_BEFORE_EVENT_START_THAT_ENTRANCE_IS_ALLOWED);
+                
+                console.log("Comparing:",event,room);
                 
                 if(room == event.location){
                     
@@ -91,6 +98,8 @@ export function validateUserHasBooking(email : string,room : string) : Promise<a
                     message += ",Room allows access now";
                     else
                     message += ",Room does not allow access yet";
+                    
+                    console.log("Resolving message");
                     
                     resolve(message);
                     

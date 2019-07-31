@@ -53,7 +53,7 @@ app.post("/validateUserHasBooking", (req, res, next) => {
     let email;
     let room;
 
-    //console.log(req.query);
+    console.log(req.query);
     
     if(req.query.hasOwnProperty("email") && req.query.hasOwnProperty("room")){
         
