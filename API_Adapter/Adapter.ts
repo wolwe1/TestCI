@@ -68,7 +68,7 @@ export class Adapter{
         
         return new Promise( (resolve,reject)=>{
 
-            this.adaptee.getUserEvents(identifier,resultSize,endTime).then( (bookings)=>{
+            this.adaptee.getUserEvents(identifier,resultSize,endTime).then( (bookings : any)=>{
 
                 if(!filter)
                 resolve(bookings);
