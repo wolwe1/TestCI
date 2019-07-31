@@ -20,6 +20,8 @@ const TOKEN_PATH = 'token.json';
 /**
 * Adaptee responsible for exchanging data with Google Calendar
 */
+var path = require("path");
+
 export class GoogleAdaptee{
 
     CREDENTIAL_PATH : string;
@@ -27,7 +29,7 @@ export class GoogleAdaptee{
 
 
     constructor(){
-        var path = require("path");
+        
         
         var absolutePath = path.resolve("..");
         //absolutePath += "/API_Adapter/";
@@ -89,8 +91,13 @@ export class GoogleAdaptee{
         return new Promise((resolve, reject) => {
             fs.readFile(this.CREDENTIAL_PATH, (err, content) => {
 
-                if (err)
+                if (err){
+                    let dir = path.resolve();
+                    console.log(dir);
+                    
                     reject('Error loading client secret file:'+ err); 
+                }
+                   
                 else
                     resolve(JSON.parse(content.toString())); 
             });  
