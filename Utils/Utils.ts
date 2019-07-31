@@ -13,7 +13,7 @@
  * @param {any} options Specifies what keys should be passed on to the new object
  * @returns {Array<any> | Object }
  */
-export function filter(data : any,options : any) : Array<any> | Object{
+export function filter(data : any,options : any) : any{
 
     if(options == null || options == undefined){
         options = {
