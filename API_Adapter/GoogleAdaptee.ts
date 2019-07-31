@@ -31,9 +31,9 @@ export class GoogleAdaptee{
     constructor(){
         
         
-        var absolutePath = path.resolve("..");
+        //var absolutePath = path.resolve("..");
         //absolutePath += "/API_Adapter/";
-        absolutePath += "TestCI/API_Adapter/";
+        let absolutePath = __dirname + "/";
 
         this.CREDENTIAL_PATH = absolutePath + "credentials.json";
         this.TOKEN_PATH = absolutePath + "token.json";
