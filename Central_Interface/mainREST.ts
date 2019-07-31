@@ -108,3 +108,10 @@ app.get('/generateToken', (req, res) => {
 
     res.json(Main.generateToken(req.subject));
 });
+
+
+
+app.get('/checkBookingsForGuests', (req, res) => {
+
+    Main.checkBookingsForGuests();
+});

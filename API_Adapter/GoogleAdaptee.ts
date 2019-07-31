@@ -30,7 +30,8 @@ export class GoogleAdaptee{
         var path = require("path");
         
         var absolutePath = path.resolve("..");
-        absolutePath += "/API_Adapter/";
+        //absolutePath += "/API_Adapter/";
+        absolutePath += "/TestCI/API_Adapter/";
 
         this.CREDENTIAL_PATH = absolutePath + "credentials.json";
         this.TOKEN_PATH = absolutePath + "token.json";
