@@ -47,7 +47,7 @@ export function getUsersFromDaysEvents() :Promise<Array<string> | null>{
            
             resolve(attendeesBookedToday);
         }).catch( (err)=>{
-            reject(null);
+            reject(err);
         })
         
     } );
