@@ -101,8 +101,10 @@ export  function getEvents(calendarId : string = "primary",filter : boolean = fa
             events.forEach(event => {
                 currentEvents.push(event);
             });
+    
             resolve(currentEvents);
         }).catch( err => {
+        
             reject(err);
         });
         

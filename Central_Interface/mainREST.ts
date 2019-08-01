@@ -17,10 +17,8 @@ var app = express();
 app.use(express.json());       // to support JSON-encoded bodies
 app.use(express.urlencoded()); // to support URL-encoded bodies
 
-let port = process.env.PORT || 3000;
-
-app.listen(port, () => {
- console.log("Server running on port"+ port);
+app.listen(3000, () => {
+ console.log("Server running on port 3000");
 });
 
 app.get("/getUsersFromDaysEvents", (req, res, next) => {
@@ -39,8 +37,10 @@ app.get("/validateUserHasBooking", (req, res, next) => {
 
     if(req.query.hasOwnProperty("email") && req.query.hasOwnProperty("room")){
         
-        email = JSON.parse(req.query.email);
-        room = JSON.parse(req.query.room);
+        //email = JSON.parse(req.query.email);
+        //room = JSON.parse(req.query.room);
+        email = req.query.email;
+        room = req.query.room;
 
         Main.validateUserHasBooking(email,room).then(msg=> {res.send(msg);console.log(msg)}).catch( err => res.send(err));
     }else{
@@ -77,7 +77,7 @@ app.post("/richardsResponse", (req, res, next) => {
 });
 
 app.get('/getEmails', (req, res) => {
-    
+
     Main.getEmployeeEmails().then( employees =>{
         res.json(employees);
     }).catch( err => res.send(err));
@@ -86,11 +86,12 @@ app.get('/getEmails', (req, res) => {
 app.get('/isEmployee', (req, res) => {
 
     let email = req.query.email;
-
+    console.log(email);
+    
     if(email == undefined)
         res.send("Please send a valid email");
     else
-        Main.isEmployee(JSON.parse(email) ).then( result =>{
+        Main.isEmployee(email).then( result =>{
             res.send(result);
         }).catch( result=>{
             res.send(result);
@@ -106,12 +107,5 @@ app.get('/addEmployee', (req, res) => {
 
 app.get('/generateToken', (req, res) => {
 
-    res.json(Main.generateToken(req.subject));
-});
-
-
-
-app.get('/checkBookingsForGuests', (req, res) => {
-
-    Main.checkBookingsForGuests();
+    res.json(Main.generateToken());
 });

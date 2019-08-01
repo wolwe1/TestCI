@@ -9,7 +9,7 @@
 import * as Adapter from "../API_Adapter/main";
 import * as Utils from "../Utils/Utils";
 import {PythonShell} from 'python-shell'; //npm install python-shell
-import * as NotificationSystem from "../notification";
+import * as NotificationSystem from "../Database_Manager/notification";
 import * as jwt from "jsonwebtoken"; //npm install jsonwebtoken
 import * as fs from "fs";
 
@@ -71,18 +71,11 @@ export function validateUserHasBooking(email : string,room : string) : Promise<a
             
             
             for (let i = 0; i < closestEvents.length; i++) {
-                console.log("Current event:",closestEvents[i]);
-                
                 let event = closestEvents[i];
 
                 let timeNow = new Date();
-                console.log("Date created");
-                
-                let entranceAllowedToEvent = new Date(event.startDate + "T"+event.startTime);
-                console.log("Entrance created");
+                let entranceAllowedToEvent = new Date(event.startDate + "T"+ event.startTime);
                 entranceAllowedToEvent.setMinutes(entranceAllowedToEvent.getMinutes() - MINUTES_BEFORE_EVENT_START_THAT_ENTRANCE_IS_ALLOWED);
-                
-                console.log("Comparing:",event,room);
                 
                 if(room == event.location){
                     
@@ -98,8 +91,6 @@ export function validateUserHasBooking(email : string,room : string) : Promise<a
                     message += ",Room allows access now";
                     else
                     message += ",Room does not allow access yet";
-                    
-                    console.log("Resolving message");
                     
                     resolve(message);
                     
@@ -121,7 +112,8 @@ export function validateUserHasBooking(email : string,room : string) : Promise<a
 export function getEmployeeEmails() : Promise<any>{
 
     return new Promise( (resolve,reject) =>{
-        var pyshell = new PythonShell("Central_Interface/test.py");
+        
+        var pyshell = new PythonShell(__dirname+"/test.py");
 
         pyshell.on('message', function (message) {
             // received a message sent from the Python script (a simple "print" statement)
@@ -139,8 +131,6 @@ export function getEmployeeEmails() : Promise<any>{
         // end the input stream and allow the process to exit
         pyshell.end(function (err) {
             if (err){
-                console.log(err);
-                
                 reject(err);
             };
   
@@ -196,8 +186,7 @@ export function checkBookingsForGuests(){ //TODO : MAke it work for the same use
                                 notifyViaOTP["startTime"] = event.startTime;
                             }
                         
-                            NotificationSystem.sendEmail("otp",notifyViaOTP,NotificationSystem.generateOTP().otp);
-                            
+                            NotificationSystem.sendEmail("otp",notifyViaOTP);
                             
                         }
                     });
@@ -214,13 +203,9 @@ export function checkBookingsForGuests(){ //TODO : MAke it work for the same use
     
 }
 
-/**
- * Generate a Json Web Token
- * @param {string} subject The sender of the generate request
- * @returns {Object}
- */
-export function generateToken(subject : string) : Object{
+export function generateToken(){
     let privateKEY  = fs.readFileSync('./private.key', 'utf8');
+    let publicKEY  = fs.readFileSync('./public.key', 'utf8');
 
     let payload = {
         item : true,
@@ -230,26 +215,22 @@ export function generateToken(subject : string) : Object{
     
     let signOptions = {
     issuer:  ISSUER,
-    subject:  subject,
+    subject:  SUBJECT,
     audience:  AUDIENCE,
     expiresIn:  "1h",
     algorithm:  "RS256"
     };
 
     let token = jwt.sign(payload, privateKEY, signOptions);
+  
+    console.log(token);
     
     return token;
     
 }
 
-/**
- * Verify if the provided token is valid
- * @param {Object} token The token to verify
- * @returns {boolean}
- */
-export function verifyToken(token : Object) : boolean{
 
-    let publicKEY  = fs.readFileSync('./public.key', 'utf8');
+export function verifyToken(token : any){
 
     var verifyOptions = {
         issuer:  ISSUER,
@@ -259,19 +240,5 @@ export function verifyToken(token : Object) : boolean{
         algorithm:  ["RS256"]
     };
 
-    let legit;
-    try {
-        legit = jwt.verify(token, publicKEY, verifyOptions);
-        return true;
-    } catch (error) {
-        console.log("Invalid token");
-        return false;
-    }
+    //var legit = jwt.verify(token, publicKEY, verifyOptions);
 }
-
-// let adminToken = generateToken("admin System");
-// let otherToken = generateToken("other");
-
-// verifyToken(adminToken);
-
-// verifyToken(otherToken);

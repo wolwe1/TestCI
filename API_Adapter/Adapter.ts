@@ -62,13 +62,13 @@ export class Adapter{
  * @param {string | number} identifier the user identifier of choice
  * @param {boolean} filter whether the result should be filtered into a simpler JSON object
  * @param {any} options if left out then standard filtering is applied otherwise options specifies what keys should be passed on to the new object
- * @returns {any }
+ * @returns {Object[] | string }
  */
     retrieveUserEvents(identifier : string, filter : boolean, options: any,resultSize : number,endTime : string) : Promise<any>{
         
         return new Promise( (resolve,reject)=>{
 
-            this.adaptee.getUserEvents(identifier,resultSize,endTime).then( (bookings : any)=>{
+            this.adaptee.getUserEvents(identifier,resultSize,endTime).then( (bookings)=>{
 
                 if(!filter)
                 resolve(bookings);
