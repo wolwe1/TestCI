@@ -115,7 +115,7 @@ app.get('/generateToken', (req, res) => {
 });
 
 //Verify app
-app.get('/google97a3344ceaaec38b', (req, res) => {
+app.get('/google97a3344ceaaec38b.html', (req, res) => {
 
     fs.readFile('google97a3344ceaaec38b.html', function (err, html) {
         if (err) 
