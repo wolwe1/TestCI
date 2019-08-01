@@ -147,7 +147,6 @@ export function isEmployee(email : string) : Promise<boolean>{
     
     return new Promise( (resolve,reject)=>{
         getEmployeeEmails().then( employees =>{
-            //console.log(JSON.parse(employees));
             resolve(Utils.inArray(email,employees)) ;
         }).catch( (err)=>{
             console.log(err);

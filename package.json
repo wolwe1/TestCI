@@ -9,6 +9,7 @@
     "googleapis": "^39.2.0",
     "jsonwebtoken": "^8.5.1",
     "nodemailer": "^6.3.0",
+    "python-shell": "^1.0.7",
     "ts-node": "^8.3.0",
     "tsc": "^1.20150623.0"
   },
