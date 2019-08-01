@@ -10,6 +10,8 @@
 //pip3 install firebase-admin
 //pip3 install firebase
 import * as Main from "./main";
+import * as fs from "fs";
+
 
 var express = require("express");
 var app = express();
@@ -110,4 +112,19 @@ app.get('/addEmployee', (req, res) => {
 app.get('/generateToken', (req, res) => {
 
     res.json(Main.generateToken());
+});
+
+//Verify app
+app.get('/google97a3344ceaaec38b', (req, res) => {
+
+    fs.readFile('google97a3344ceaaec38b.html', function (err, html) {
+        if (err) 
+            throw err; 
+        
+        
+        res.writeHeader(200, {"Content-Type": "text/html"});  // <-- HERE!
+        res.write(html);  // <-- HERE!
+        res.end();  
+        
+    });
 });
