@@ -81,6 +81,10 @@ export class Adapter{
         });
     }
 
+    watch(){
+        this.adaptee.watchChannel();
+    }
+
 
 /**
  * retrieves the scheduled events of a specific user or returns a null object if there are none

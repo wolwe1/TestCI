@@ -241,3 +241,9 @@ export function verifyToken(token : any){
 
     //var legit = jwt.verify(token, publicKEY, verifyOptions);
 }
+
+function watch(){
+    Adapter.watch();
+}
+
+watch();

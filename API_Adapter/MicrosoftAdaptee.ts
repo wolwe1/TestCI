@@ -52,10 +52,14 @@ async getUserEvents(identifier : string = "primary",resultSize : number = -1,end
 /**
  * retrieves the calendars associated with a user
  */
-    async getUserCalendars() : Promise<any>{
+    getUserCalendars() : Promise<any>{
         
         return new Promise( (resolve,reject)=>{
             resolve("I am not implemented yet");
         })
+    }
+
+    watchChannel(){
+        
     }
 }

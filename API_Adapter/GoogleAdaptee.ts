@@ -9,6 +9,7 @@
 import * as fs from 'fs';
 import * as readline from 'readline';
 import {google} from 'googleapis'; //npm install googleapis@39 --save
+import { OAuth2Client } from 'googleapis-common';
 
 // If modifying these scopes, delete token.json.
 const SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
@@ -58,6 +59,45 @@ export class GoogleAdaptee{
                     
     }
 
+    watchChannel(){
+        return new Promise( (resolve,reject) =>{
+            this.loadClientSecrets().then( (credentials)=>{
+
+                this.authorize(credentials).then( (oAuth2Client)=>{ 
+                
+                    this.watch(OAuth2Client);
+                    
+                    }).catch( (err)=>{ reject(err);});
+    
+                }).catch( err => reject(err))
+        });
+    }
+
+    watch(auth){
+        
+        const calendar = google.calendar({version: 'v3', auth});
+        auth.getAccessToken().then( access_token =>{
+            console.log("TOKEN",access_token);
+            
+            calendar.events.watch({
+                calendarId: "primary",
+                requestBody: {
+                        id : "3f00ee3c-e643-483e-9c3f-ad009bdcb7c4",
+                        type: "web_hook",
+                        address: "https://testing-ci12.herokuapp.com/updateEvents",
+                        token : access_token
+                }
+                }, (error, result) => {
+                if (error) console.log(error);
+                
+                console.log(result);
+                });
+        }).catch(err => console.log("err",err) );
+        
+
+        
+        
+    }
 /**
  * retrieves the calendars associated with a user
  */
@@ -109,7 +149,7 @@ export class GoogleAdaptee{
 
             const {client_secret, client_id, redirect_uris} = credentials.installed;
             const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
-           
+        
             // Check if we have previously stored a token.
             fs.readFile(this.TOKEN_PATH, (err, token) => {
             if (err)
@@ -119,7 +159,7 @@ export class GoogleAdaptee{
                     reject(err);
                 })
             else
-                oAuth2Client.setCredentials(JSON.parse(token.toString()));
+                oAuth2Client.setCredentials(JSON.parse(token.toString()));    
                 resolve(oAuth2Client);
             });
         })

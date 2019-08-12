@@ -111,6 +111,6 @@ export  function getEvents(calendarId : string = "primary",filter : boolean = fa
     });
 }
 
-
-
-
+export function watch(){
+    adapter.watch();
+}
